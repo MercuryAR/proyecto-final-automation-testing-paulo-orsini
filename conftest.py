@@ -33,6 +33,16 @@ def pytest_configure(config):
     config.stash[metadata_key]["Proyecto"] = "Proyecto Final – Automation Testing (Talento Tech)"
 
 
+def pytest_html_report_title(report):
+    """Título del reporte HTML (pytest-html 4.x ya no usa la opción de pytest.ini)."""
+    report.title = "Proyecto Final – Automation Testing – Paulo Orsini"
+
+
+def pytest_html_results_summary(prefix, summary, postfix):
+    """Descripción del reporte HTML."""
+    prefix.extend(["<p>Suite UI (SauceDemo) + API (JSONPlaceholder)</p>"])
+
+
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
