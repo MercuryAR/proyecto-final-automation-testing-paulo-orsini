@@ -1,6 +1,6 @@
 [![CI TalentoLab](https://github.com/MercuryAR/proyecto-final-automation-testing-paulo-orsini/actions/workflows/ci.yml/badge.svg)](https://github.com/MercuryAR/proyecto-final-automation-testing-paulo-orsini/actions/workflows/ci.yml)
 
-# proyecto-final-automation-testing-paulo-orsini
+# Proyecto Final – Framework de Automatización de Pruebas
 Framework de automatización de pruebas en Python con Pytest, Selenium WebDriver (Page Object Model) y Requests para pruebas de UI y API. Incluye datos de prueba externos, capturas automáticas en fallos, reportes HTML, logging y CI con GitHub Actions. Proyecto Final Integrador – Talento Tech.
 
 ## 1. Propósito
