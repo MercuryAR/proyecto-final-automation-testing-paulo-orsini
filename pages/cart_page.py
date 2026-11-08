@@ -14,6 +14,7 @@ class CartPage:
     URL = "https://www.saucedemo.com/cart.html"
 
     _TITLE = (By.CSS_SELECTOR, ".title")
+    _CART_LIST = (By.CSS_SELECTOR, ".cart_list")
     _ITEM_NAMES = (By.CSS_SELECTOR, ".cart_item .inventory_item_name")
     _CHECKOUT_BUTTON = (By.ID, "checkout")
     _CONTINUE_SHOPPING = (By.ID, "continue-shopping")
@@ -56,8 +57,10 @@ class CartPage:
 
     def obtener_nombres_productos(self):
         """Devuelve los nombres de los productos del carrito."""
+        self.wait.until(EC.presence_of_element_located(self._CART_LIST))
         return [e.text for e in self.driver.find_elements(*self._ITEM_NAMES)]
 
     def obtener_cantidad_productos(self):
         """Devuelve cuántos productos hay en el carrito."""
+        self.wait.until(EC.presence_of_element_located(self._CART_LIST))
         return len(self.driver.find_elements(*self._ITEM_NAMES))

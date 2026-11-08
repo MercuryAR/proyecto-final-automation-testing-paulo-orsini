@@ -58,6 +58,7 @@ class InventoryPage:
 
         self.wait.until(EC.element_to_be_clickable(self._CART_LINK)).click()
         self.wait.until(EC.url_contains("/cart.html"))
+        self.wait.until(EC.visibility_of_element_located(CartPage._TITLE))
         return CartPage(self.driver)
 
     def hacer_logout(self):
