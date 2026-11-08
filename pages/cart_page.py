@@ -58,6 +58,8 @@ class CartPage:
     def obtener_nombres_productos(self):
         """Devuelve los nombres de los productos del carrito."""
         self.wait.until(EC.presence_of_element_located(self._CART_LIST))
+        self.wait.until(lambda d: d.find_elements(*self._ITEM_NAMES) or d.execute_script(
+            "return document.readyState") == "complete")
         return [e.text for e in self.driver.find_elements(*self._ITEM_NAMES)]
 
     def obtener_cantidad_productos(self):

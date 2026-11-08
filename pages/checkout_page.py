@@ -69,6 +69,8 @@ class CheckoutPage:
     def obtener_productos_overview(self):
         """Devuelve los nombres de productos listados en el overview."""
         self.wait.until(EC.url_contains("/checkout-step-two.html"))
+        # Espera a que el overview termine de renderizar los productos
+        self.wait.until(EC.visibility_of_element_located(self._OVERVIEW_ITEMS))
         return [e.text for e in self.driver.find_elements(*self._OVERVIEW_ITEMS)]
 
     def obtener_total(self):
