@@ -1,0 +1,50 @@
+name: CI TalentoLab
+
+on:
+  push:
+  pull_request:
+    branches: [main, develop]
+
+env:
+  PYTHON_VERSION: '3.12'
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      # Si falla un smoke, el pipeline queda en rojo
+      - name: Pruebas smoke
+        run: pytest -m smoke
+
+      - name: Suite completa (UI + API)
+        if: always()
+        run: pytest tests/ tests_api/
+
+      - name: Guardar reporte HTML y capturas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-report
+          path: reports/
+          retention-days: 90
+
+      - name: Guardar log de la suite
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: suite-log
+          path: logs/
+          retention-days: 90
