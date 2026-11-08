@@ -1,0 +1,5 @@
+[
+  {"nombre": "Sauce Labs Backpack", "precio": 29.99, "descripcion": "mochila"},
+  {"nombre": "Sauce Labs Bike Light", "precio": 9.99, "descripcion": "luz_bici"},
+  {"nombre": "Sauce Labs Bolt T-Shirt", "precio": 15.99, "descripcion": "remera"}
+]

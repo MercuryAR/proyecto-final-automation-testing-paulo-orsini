@@ -1,0 +1,4 @@
+[
+  {"title": "Post de prueba QA", "body": "Contenido del primer post", "userId": 1, "descripcion": "usuario_1"},
+  {"title": "Otro post de QA", "body": "Contenido del segundo post", "userId": 2, "descripcion": "usuario_2"}
+]

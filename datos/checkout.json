@@ -1,0 +1,10 @@
+{
+  "validos": [
+    {"nombre": "Paulo", "apellido": "Orsini", "codigo_postal": "1001", "descripcion": "comprador_fijo"}
+  ],
+  "invalidos": [
+    {"nombre": "", "apellido": "Orsini", "codigo_postal": "1001", "error": "Error: First Name is required", "descripcion": "sin_nombre"},
+    {"nombre": "Paulo", "apellido": "", "codigo_postal": "1001", "error": "Error: Last Name is required", "descripcion": "sin_apellido"},
+    {"nombre": "Paulo", "apellido": "Orsini", "codigo_postal": "", "error": "Error: Postal Code is required", "descripcion": "sin_codigo_postal"}
+  ]
+}
