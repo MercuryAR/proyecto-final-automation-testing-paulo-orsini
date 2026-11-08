@@ -21,7 +21,10 @@ Python · Pytest (+ pytest-html, pytest-rerunfailures) · Selenium WebDriver (Se
 ├── logs/                      # suite.log (generado)
 ├── conftest.py                # fixtures, screenshots en fallos, hooks del reporte
 ├── pytest.ini                 # opciones, markers
-└── requirements.txt
+├── requirements.txt           # dependencias del proyecto (pip install -r)
+├── .gitignore                 # archivos generados que no se versionan
+├── LICENSE                    # licencia MIT
+└── README.md                  # este documento
 ```
 
 ## 4. Instalación
