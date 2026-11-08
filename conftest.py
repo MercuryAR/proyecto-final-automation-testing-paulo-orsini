@@ -67,7 +67,7 @@ def usuario_logueado(driver):
     """Deja al usuario ``standard_user`` logueado en el inventario y devuelve su página."""
     from pages.login_page import LoginPage  # import diferido: evita ciclos
 
-    return LoginPage(driver).abrir().login_completo("standard_user", "secret_sauce")
+    return LoginPage(driver).abrir().login_completo("standard_user", "secret_sauce").ir_a_inventario()
 
 
 @pytest.fixture(autouse=True)
