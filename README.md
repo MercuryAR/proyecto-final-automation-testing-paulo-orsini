@@ -9,7 +9,12 @@ Demostrar un framework de testing completo: pruebas de **UI** sobre [SauceDemo](
 ## 2. Tecnologías
 Python · Pytest (+ pytest-html, pytest-rerunfailures) · Selenium WebDriver (Selenium Manager) · Requests · Faker · Git · GitHub (+ GitHub Actions).
 
-## 3. Estructura del proyecto
+## 3. Arquitectura
+![Arquitectura del framework](arquitectura-screenshot.png)
+
+El pipeline de GitHub Actions ejecuta la suite de pytest: los tests de UI y de API leen los datos de `datos/`, usan los Page Objects y las utilidades, prueban SauceDemo y JSONPlaceholder, y dejan como evidencia el reporte HTML, las capturas y los logs.
+
+## 4. Estructura del proyecto
 ```
 ├── .github/workflows/ci.yml   # Pipeline "CI TalentoLab"
 ├── pages/                     # Page Objects: Login, Inventory, Cart, Checkout
@@ -27,14 +32,14 @@ Python · Pytest (+ pytest-html, pytest-rerunfailures) · Selenium WebDriver (Se
 └── README.md                  # este documento
 ```
 
-## 4. Instalación
+## 5. Instalación
 Requiere **Python 3.10+** y **Google Chrome** instalado.
 ```bash
 python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## 5. Ejecución de las pruebas
+## 6. Ejecución de las pruebas
 ```bash
 pytest                 # suite completa
 pytest tests/          # solo UI
@@ -45,18 +50,18 @@ pytest -m api          # por marker (smoke, ui, api, regression, e2e)
 CI=true pytest         # modo headless (simula GitHub Actions)
 ```
 
-## 6. Reportes
+## 7. Reportes
 * **`reports/report.html`**: reporte autocontenido con estado (pasó/falló), duración, columna **URL** de la página al terminar cada test de UI y metadata del autor. Abrirlo con el navegador.
 * **`reports/screens/`**: captura PNG de cada test de UI fallido, nombrada `nombre_del_test_AAAAMMDD_HHMMSS.png`; también queda embebida en el reporte HTML.
 * **`logs/suite.log`**: log del logger `talentolab` (inicio/fin de tests, acciones de los Page Objects, requests de API con método, URL, status y tiempo, errores y rutas de capturas).
 * **En GitHub**: pestaña *Actions* → ejecución del workflow → sección *Artifacts* → descargar `html-report` (reporte + capturas) y `suite-log` (se conservan 90 días).
 
-## 7. Casos de prueba cubiertos
+## 8. Casos de prueba cubiertos
 **UI (22 casos parametrizados):** login desde CSV (válido + negativos: bloqueado, clave incorrecta, inexistente, vacío); catálogo (título, productos, precios, 4 ordenamientos); carrito desde JSON (agregar, varios, quitar); logout; checkout completo (e2e) y checkout con datos faltantes (negativo).
 
 **API (12 casos):** GET lista y por id, GET 404, POST (desde JSON y con Faker), PUT, DELETE; encadenamiento POST → PATCH → DELETE (< 3 s) y `GET /users` → `GET /posts?userId=`. Cada respuesta se valida en 5 niveles: status, cabeceras, estructura, contenido y tiempo.
 
 > JSONPlaceholder **simula** las escrituras: no persiste los recursos creados.
 
-## 8. Licencia
+## 9. Licencia
 MIT – ver [LICENSE](LICENSE).
