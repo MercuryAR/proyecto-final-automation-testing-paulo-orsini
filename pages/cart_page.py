@@ -1,4 +1,5 @@
 """Page Object del carrito de compras de SauceDemo."""
+from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -29,7 +30,18 @@ class CartPage:
         """Quita un producto desde el carrito."""
         log.info("CartPage: quitando '%s'", nombre)
         locator = (By.ID, f"remove-{nombre.lower().replace(' ', '-')}")
-        self.wait.until(EC.element_to_be_clickable(locator)).click()
+
+        def _hacer_click(driver):
+            """Busca el botón y lo presiona en el mismo intento."""
+            boton = EC.element_to_be_clickable(locator)(driver)
+            if not boton:
+                return False
+            boton.click()
+            return True
+
+        # El carrito se re-renderiza al cargar: si el botón queda "stale" entre
+        # encontrarlo y hacer click, se vuelve a buscar en lugar de fallar.
+        WebDriverWait(self.driver, 10, ignored_exceptions=[StaleElementReferenceException]).until(_hacer_click)
         self.wait.until(EC.invisibility_of_element_located(locator))
         return self
 
